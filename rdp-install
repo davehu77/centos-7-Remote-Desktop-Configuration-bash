@@ -13,7 +13,7 @@ chcon --type=bin_t /usr/sbin/xrdp
 chcon --type=bin_t /usr/sbin/xrdp-sesman
 
 firewall-cmd --permanent --zone=public --add-port=3389/tcp
-firewall-cmd -reload
+firewall-cmd --reload
 
 systemctl enable xrdp
 systemctl start xrdp
