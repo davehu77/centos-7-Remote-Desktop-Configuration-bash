@@ -1,0 +1,21 @@
+yum -y update
+yum -y groupinstall "GNOME Desktop" "Administration Tools"
+
+ln -sf /lib/systemd/system/runlevel5.target /etc/systemd/system/default.target
+
+yum -y install epel-release
+yum -y update
+yum clean all
+
+yum -y install xrdp tigervnc-server
+
+chcon --type=bin_t /usr/sbin/xrdp
+chcon --type=bin_t /usr/sbin/xrd-sesman
+
+firewall-cmd --permanent --zone=public --add-port=3389/tcp
+firewall-cmd -reload
+
+systemctl enable xrdp
+systemctl start xrdp
+
+netstat -antup |grep xrdp
